@@ -18,7 +18,7 @@ function App() {
 
       <h2>Gallery</h2>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '1rem' }}>
-        <img src="/assets/2inches_valves.jpg" width="200" alt="Asset 1" />
+        <img src="/assets/aseptic_bag14.jpg" width="200" alt="Asset 1" />
         <img src="/assets/image2.png" width="200" alt="Asset 2" />
       </div>
     </div>
