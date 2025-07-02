@@ -9,8 +9,8 @@ RUN npm run build
 FROM nginx:1.25-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Mount will attach to /app/public/assets at runtime; symlink to NGINX root
-RUN mkdir -p /usr/share/nginx/html/assets && \
+# Symlink for Dokku-mounted assets
+RUN rm -rf /usr/share/nginx/html/assets && \
     ln -s /app/public/assets /usr/share/nginx/html/assets
 
 EXPOSE 80
