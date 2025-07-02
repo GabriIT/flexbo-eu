@@ -15,3 +15,11 @@ RUN rm -rf /usr/share/nginx/html/assets && \
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
+# Copy entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 80
+ENTRYPOINT ["/entrypoint.sh"]
+
