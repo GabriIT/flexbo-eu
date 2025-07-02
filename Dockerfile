@@ -1,12 +1,17 @@
-# Stage 1: Build
-FROM node:20-alpine as builder
+# Step 1: Build with Vite
+FROM node:18 AS builder
 WORKDIR /app
 COPY . .
-RUN npm install && npm run build
+RUN npm install
+RUN npm run build
 
-# Stage 2: Serve with nginx
-FROM nginx:alpine
+# Step 2: Serve with NGINX
+FROM nginx:1.25-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
-RUN mkdir -p /usr/share/nginx/html/assets
+
+# Link for mounted assets (Dokku volume will mount to /app/public/assets)
+RUN ln -s /app/public/assets /usr/share/nginx/html/assets
+
+# Expose port and run
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
