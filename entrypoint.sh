@@ -1,13 +1,17 @@
 #!/bin/sh
 
-# Create the symlink at runtime (in case it's missing)
 TARGET=/app/public/assets
 LINK=/usr/share/nginx/html/assets
 
-if [ ! -L "$LINK" ]; then
-  echo "Creating symlink: $LINK → $TARGET"
-  ln -s "$TARGET" "$LINK"
+# Remove directory or broken symlink if it exists
+if [ -e "$LINK" ] || [ -d "$LINK" ]; then
+  echo "Removing existing $LINK"
+  rm -rf "$LINK"
 fi
+
+# Create fresh symlink
+echo "Creating symlink: $LINK → $TARGET"
+ln -s "$TARGET" "$LINK"
 
 # Start nginx
 exec nginx -g 'daemon off;'
