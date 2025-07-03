@@ -13,8 +13,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 RUN rm -rf /usr/share/nginx/html/assets && \
     ln -s /app/public/assets /usr/share/nginx/html/assets
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
 
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
