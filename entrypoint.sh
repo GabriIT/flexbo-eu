@@ -11,3 +11,6 @@ fi
 
 # Start nginx
 exec nginx -g 'daemon off;'
+
+ls -l /usr/share/nginx/html >> /var/log/symlink-check.log
+
