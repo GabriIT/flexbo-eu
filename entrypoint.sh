@@ -3,18 +3,20 @@
 TARGET=/app/public/assets
 LINK=/usr/share/nginx/html/assets
 
-# Remove directory or broken symlink if it exists
-if [ -e "$LINK" ] || [ -d "$LINK" ]; then
-  echo "Removing existing $LINK"
+# Check if something exists at the link path
+if [ -e "$LINK" ] || [ -d "$LINK" ] || [ -L "$LINK" ]; then
+  echo "Removing existing path at $LINK"
   rm -rf "$LINK"
 fi
 
-# Create fresh symlink
+# Create the symlink
 echo "Creating symlink: $LINK → $TARGET"
 ln -s "$TARGET" "$LINK"
 
 # Start nginx
 exec nginx -g 'daemon off;'
 
+
 ls -l /usr/share/nginx/html >> /var/log/symlink-check.log
 
+echo "[Entrypoint] Symlink created at: $(date)"
