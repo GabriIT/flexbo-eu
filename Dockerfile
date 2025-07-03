@@ -9,13 +9,6 @@ RUN npm run build
 FROM nginx:1.25-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Symlink for Dokku-mounted assets
-RUN rm -rf /usr/share/nginx/html/assets && \
-    ln -s /app/public/assets /usr/share/nginx/html/assets
-
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
-
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
