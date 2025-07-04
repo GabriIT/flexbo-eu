@@ -1,7 +1,7 @@
 #!/bin/sh
 
 TARGET=/app/public/assets
-LINK=/usr/share/nginx/html/assets
+LINK=/usr/share/nginx/html/media
 
 # Check if something exists at the link path
 if [ -e "$LINK" ] || [ -d "$LINK" ] || [ -L "$LINK" ]; then
