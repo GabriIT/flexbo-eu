@@ -1,0 +1,8 @@
+# dev clutter
+.git
+.vscode
+# already re-created inside the image
+node_modules
+# build output from previous local runs
+dist
+dist-ssr
