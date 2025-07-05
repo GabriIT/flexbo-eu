@@ -7,17 +7,17 @@ FROM node:20-bullseye AS builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci                    # reproducible install
+RUN npm ci                    
 
 COPY . .
-RUN npm run build             # → /app/dist
+RUN npm run build             
 
 
 
 #########################
 # --- runtime stage --- #
 #########################
-FROM nginx:alpine             # runtime can stay tiny
+FROM nginx:alpine             
 ENV NODE_ENV=production
 
 COPY --from=builder /app/dist /usr/share/nginx/html
